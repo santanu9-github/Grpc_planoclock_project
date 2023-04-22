@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option java_package = "com.grpc.feedback";
+
+service feedback {
+  rpc addFeedback(feedMessage) returns(APIResponse);
+  rpc updateFeedbackById(updateFeedback) returns(APIResponse);
+  rpc deleteFeedbackById(FeedbackID)  returns(APIResponse);
+  rpc getAllFeedback(empty) returns(AllFeedbackResponse);
+
+}
+
+message feedMessage{
+  int32 userId = 1;
+  int32 bookingId = 2;
+  string name = 3;
+  string email = 4;
+  string writeReview = 5;
+}
+
+message updateFeedback{
+  int32 userId = 1;
+  int32 bookingId = 2;
+  string name =3;
+  string email = 4;
+  string writeReview = 5;
+}
+
+message FeedbackID{
+  int32 bookingid = 1;
+  string name = 2;
+  string email = 3;
+
+}
+
+
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
+
+message FeedMessage1{
+  int32 userId = 1;
+  int32 bookingId = 2;
+  string name = 3;
+  string email = 4;
+  string datetime = 5;
+  string writeReview = 6;
+}
+message empty{
+
+}
+message AllFeedbackResponse{
+  repeated FeedMessage1 messages = 1;
+
+}

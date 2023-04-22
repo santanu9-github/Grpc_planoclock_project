@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option java_package = "com.grpc.administrator";
+
+service administrator{
+  rpc login(AdminLogin) returns (APIResponse);
+  rpc getUserById(UserId) returns (AllUserDetails);
+  rpc getAllUser(empty) returns (AllUserDetails);
+  rpc getUsersByUserType(UserType) returns (AllUserDetails);
+  rpc DeleteUser(deleteByUserId) returns (APIResponse);
+  rpc getFeedbackById(UserId) returns (FeedbackDetails);
+  rpc getAllFeedback(empty) returns (AllFeedbackDetails);
+  rpc DeleteFeedbackById(UserId) returns (APIResponse);
+
+}
+
+message AdminLogin{
+  string username = 1;
+  string password = 2;
+
+}
+message UserId{
+  int32 userId = 1;
+
+}
+message empty{
+
+}
+message UserDetails{
+  int32 userId = 1;
+  string usertype = 2;
+  string username = 3;
+  string first_name = 4;
+  string last_name = 5;
+  string email = 6;
+  string mobileno = 7;
+  string city = 8;
+  string birthDate = 9;
+
+}
+message AllUserDetails{
+  repeated UserDetails User = 1;
+  string responseMessage = 2;
+  int32 responseCode = 3;
+}
+message UserType{
+  string userType = 1;
+
+}
+message deleteByUserId{
+  int32 userId = 1;
+}
+message FeedbackDetails{
+  int32 userId = 1;
+  int32 bookingId = 2;
+  string name = 3;
+  string email = 4;
+  string datetime = 5;
+  string writeReview = 6;
+  string responseMessage = 7;
+  int32 responseCode = 8;
+}
+message AllFeedbackDetails{
+  repeated FeedbackDetails Feedback = 1;
+  string responseMessage = 2;
+  int32 responseCode = 3;
+}
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}

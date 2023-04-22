@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option java_package = "com.capstoneProject.grpc";
+
+service meetingSpaceProvider {
+  rpc addRoom(AddingRoomRequest) returns (APIResponse);
+  rpc editRoom(EditRoomRequest) returns (APIResponse);
+  rpc deleteRoom(DeleteRoomRequest) returns (APIResponse);
+  rpc getAllRoom(ViewAllRoomRequest) returns (APIResponse);
+}
+
+message AddingRoomRequest {
+  int64 roomId = 1;
+  string size = 2;
+  int32 capacity = 3;
+  string buildingNo = 4;
+  string city = 5;
+  string state = 6;
+  int64 price = 7;
+  bool availability = 8;
+  string room_type = 9;
+  string room_name = 10;
+}
+
+message EditRoomRequest {
+  int64 roomId = 1;
+  string size = 2;
+  int32 capacity = 3;
+  string buildingNo = 4;
+  string city = 5;
+  string state = 6;
+  int64 price = 7;
+  bool availability = 8;
+  string room_type = 9;
+  string room_name = 10;
+}
+
+message DeleteRoomRequest {
+  int64 roomId = 1;
+}
+
+message ViewAllRoomRequest {
+  string city = 3;
+  string state = 4;
+}
+
+message APIResponse{
+  repeated AddingRoomRequest response = 1;
+  string responseMessage = 2;
+  int32 responseCode = 3;
+}

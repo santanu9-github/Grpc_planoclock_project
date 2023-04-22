@@ -1,0 +1,47 @@
+syntax="proto3";
+
+
+option java_package="com.stackroute.planoclock";
+
+service userAuth{
+  //3 endpoint of user authentication service
+  rpc userRegister(registration) returns (apiResponse);
+  rpc login(validateLogin) returns (apiResponse);
+  rpc forgetPassword(forgetMessage) returns (apiResponse);
+  rpc resetPassword(resetMessage) returns (apiResponse);
+}
+//registration message
+message registration{
+  string userType=1;
+  string  username=2;
+  string email=3;
+  string password=4;
+  string reTypePassword=5;
+  string mobileNo=6;
+
+}
+//forget password message
+message forgetMessage{
+  string userType=1;
+  string email=2;
+  string userName=3;
+}
+//validate login message
+message  validateLogin{
+
+  string userName=1;
+  string password=2;
+
+}
+//response message
+message apiResponse{
+  string responseMessage=1;
+  int32 responseCode=2;
+}
+//reset message
+message resetMessage{
+  string userName=1;
+  string newPassword=2;
+  string reTypePassword=3;
+  string otp=4;
+}

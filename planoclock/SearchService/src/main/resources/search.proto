@@ -1,0 +1,34 @@
+syntax="proto3";
+
+option java_package="grpc.search";
+
+service search {
+  rpc search(SearchMessage) returns (APIResponse);
+}
+
+message SearchMessage {
+  string roomType=1;
+  int32 capacity=2;
+  double maxPrice=3;
+  double minPrice=4;
+  string city=5;
+  string startDateTime=6;
+  string endDateTime=7;
+}
+
+message APIResponse {
+  repeated SearchResults response=1;
+  string responseMessage=2;
+  int32 responseCode=3;
+}
+
+message SearchResults {
+  int32 roomId=1;
+  string roomName=2;
+  string roomType=3;
+  int32 capacity=4;
+  double price=5;
+  string buildingNo=6;
+  string city=7;
+  string state=8;
+}

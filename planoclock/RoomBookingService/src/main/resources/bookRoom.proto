@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+option java_package = "org.example";
+
+service bookRoom {
+  rpc viewRoomDetails(empty) returns (APIResponse);
+  rpc bookRoom(roomBook) returns (roomBookResponse);
+  rpc cancelRoom(roomCancel) returns (roomBookResponse);
+  rpc getAllRoomsByUserId(userId) returns (getAllRoomResponse);
+  rpc rescheduleBooking(rescheduleBook) returns(roomBookResponse);
+  //  rpc logout(empty) returns (APIResponse);
+}
+
+message roomFilter{
+  string username = 1;
+  string password = 2;
+}
+
+message APIResponse {
+  repeated roomDetails response=1;
+  string responseMessage=2;
+  int32 responseCode=3;
+}
+
+message roomDetails{
+  int32 roomId = 1;
+  string roomName = 2;
+  string roomCategory = 3;
+  string size = 4;
+  int32 capacity = 5;
+  string buildingNo = 6;
+  string city = 7;
+  string state = 8;
+  double price = 9;
+  bool availability = 10;
+}
+
+message roomBook {
+  string userEmailId = 1;
+  string roomName = 2;
+  string description = 3;
+  string CheckInDate = 4;
+  string CheckOutDate = 5;
+}
+
+message roomBookResponse {
+  string responseMessage=1;
+  int32 responseCode=2;
+}
+
+message roomCancel {
+  int32 bookingId = 1;
+}
+
+message userId {
+  int32 userId = 1;
+}
+
+message getAllRoomResponse {
+  string userName = 1;
+  string registeredMail = 2;
+  repeated bookingDetails response = 3;
+  string responseMessage=4;
+  int32 responseCode=5;
+}
+
+message bookingDetails {
+  int32 bookingId = 1;
+  int32 roomId = 2;
+  string roomName = 3;
+  string roomCategory = 4;
+  string size = 5;
+  int32 capacity = 6;
+  string buildingNo = 7;
+  string city = 8;
+  string state = 9;
+  double price = 10;
+  string description = 11;
+  string CheckInDate = 12;
+  string CheckOutDate = 13;
+}
+
+message rescheduleBook {
+  int32 bookingId = 1;
+  int32 userId = 2;
+  int32 roomId = 3;
+  string checkInDate = 4;
+  string checkOutDate = 5;
+}
+message loginMessage{
+  string username = 1;
+  string password = 2;
+}
+message empty{
+}

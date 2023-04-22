@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+
+option java_package = "org.example";
+
+service  NotifyService {
+  rpc NotifyRegistration(registrationMessage) returns (APIResponse);
+  rpc NotifyBooking(bookingMessage) returns(APIResponse);
+  rpc NotifyBookingCancellation(bookingcancellation) returns (APIResponse);
+  rpc generateOtp(email) returns (otpResponse);
+  rpc NotifyUserAction(userAction) returns (APIResponse);
+}
+
+message registrationMessage{
+  string  RecipientsMailId = 1;
+  string  Username = 2;
+  int32 Mobilenumber = 3;
+
+
+}
+
+message bookingMessage {
+  string username = 1;
+  string userEmailId =2;
+  string city = 3;
+  int32 Capacity =4;
+  string CheckInDate = 5;
+  string CheckOutDate =6;
+  string StratTime =7;
+  string EndTime = 8;
+
+}
+
+message bookingcancellation {
+  string Username = 1;
+  string UserEmailId = 2;
+  string BookingId = 3;
+
+}
+
+
+message APIResponse {
+  string responseCode=1;
+  string responseMessage=2;
+}
+
+message email {
+  string userEmail=1;
+}
+
+message otpResponse {
+  string otp=1;
+  string generatedTimeStamp=2;
+}
+message userAction {
+  int32 actionType=1;
+  string username=2;
+  string userEmail=3;
+}

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option java_package = "org.example";
+service userService {
+  rpc userUpdateProfile(userUpdateProfileMessage) returns (APIResponse);
+  rpc updatePassword(userUpdatePasswordMessage) returns (APIResponse);
+  rpc createProfile(createProfileMessage) returns (APIResponse);
+  rpc getUserByEmail(getUserByEmailMessage) returns (userDetails);
+  rpc getUserByNumber(getUserByNumberMessage) returns (userDetails);
+  rpc getAllUser(allUser) returns(allUserResponse);
+}
+message userUpdateProfileMessage{
+  string usertype=1;
+  string first_name= 2;
+  string last_name=3;
+  string birthDate =4;
+  string email = 5;
+  string city =6;
+  string mobileno=7;
+}
+message createProfileMessage{
+  string usertype=1;
+  string first_name= 2;
+  string last_name=3;
+  string birthDate =4;
+  string email = 5;
+  string city =6;
+}
+message getUserByEmailMessage{
+  string email=1;
+}
+message getUserByNumberMessage{
+  string number=1;
+}
+message userUpdatePasswordMessage{
+  int32 userid=1;
+  string currentPassword=2;
+  string newPassword =3;
+  string reTypeNewPassword=4;
+}
+message allUser{
+}
+message  allUserResponse{
+  repeated allUserDetails allUserDetail=1;
+  string responseMessage=2;
+  int32 responseCode=3;
+}
+message allUserDetails{
+  int32 userId=1;
+  string usertype=2;
+  string first_name= 3;
+  string last_name=4;
+  string birthDate =5;
+  string email = 6;
+  string city =7;
+  string mobileno=8;
+  string username=9;
+}
+message userDetails{
+  allUserDetails UserDetail=1;
+  string responseMessage=2;
+  int32 responseCode=3;
+}
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
